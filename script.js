@@ -42,7 +42,7 @@ async function updateDom(text) {
     const data = await getNewsData();
     const filteredData = data[`${text}`];
     const mainHeading = document.querySelector('h1');
-    mainHeading.innerText = text;
+    mainHeading.innerText = text + " News";
     console.log(filteredData)
     const mainBannerContentImage = document.querySelector('.left-div img');
     mainBannerContentImage.src = filteredData[0].og;
@@ -58,8 +58,7 @@ function addRightDivContent(data) {
     let rightDivContent = document.querySelector('.right-div');
     rightDivContent.innerHTML = '';
     for (let i = 1; i < 4; i++) {
-        let anchorTag = document.createElement('a');
-        anchorTag.href = data[i].link
+        let anchorTag = document.createElement('div');
         anchorTag.classList.add('right-div_content');
         let image = document.createElement('img');
         image.src = data[i].og;
@@ -67,8 +66,9 @@ function addRightDivContent(data) {
         let div = document.createElement('div');
         let h4 = document.createElement('h4');
         h4.innerText = data[i].title;
-        let button = document.createElement('button');
+        let button = document.createElement('a');
         button.innerText = 'Read Article';
+        button.href = data[i].link;
         div.appendChild(h4);
         div.appendChild(button);
         anchorTag.appendChild(div);
